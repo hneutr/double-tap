@@ -14,10 +14,10 @@
 
                                                                 *doubletap-toc*
 
-1 Introduction                                              |doubletap-intro|
-2 Requirements                                              |doubletap-reqs|
-3 Trivia                                                    |doubletap-trivia|
-4 Contributing                                              |doubletap-contrib|
+1 Introduction                                                 |doubletap-intro|
+2 Requirements                                                  |doubletap-reqs|
+3 Contributing                                               |doubletap-contrib|
+4 Acknowledgements                                  |doubletap-acknowledgements|
 
 The functionality mentioned here is a plugin, see |add-plugin|. You can
 avoid loading this plugin by setting the "loaded_doubletap" global
@@ -31,61 +31,72 @@ probably an even easier way.
 ===============================================================================
 1 Introduction                                                *doubletap-intro*
 
-From time to time people ask on #vim on FreeNode how they can disable automatic
-insertion of comments when they open a new line. For example, in the following
-situation, where | marks the cursor:
->
+In a comment or when making a list in markdown, it's nice to be able to insert
+a newline that continues the comment or makes a new list item, but sometimes
+that behavior is annoying; sometimes, when you insert a newline from a comment
+or a list item, you just want a newline.
+
+This plugin provides a way to handle those situations with a little less
+thought: if you've just inserted a comment or list item you don't want, you
+can delete it by re-pressing the enter key.
+
+Here's an example with comments, where '|' marks the cursor:
+
     # This is a dummy comment for the
     # sake of giving an example.|
-<
-pressing |<Enter>| will insert comments like this:
+
+pressing |<Enter>| will insert a comment, like this:
 >
     # This is a dummy comment for the
     # sake of giving an example.
     # |
-<
-This can be very handy, but the times it isn't it is extremely annoying.
-Double-Tap fixes this once and for all. Continuing the example above, pressing
-|Enter| one more time will yield the following:
->
+
+If you don't want that comment, press |<Enter>| again:
+
     # This is a dummy comment for the
     # sake of giving an example.
     |
-<
-So if you want to open a new line but don't what a new comment line,
-double-tapping the |Enter| key will fix it for you! Pressing |Enter| after
-opening a new line with |o| or |O| from normal mode has the same effect.
+
+The same holds true for unnumbered markdown lists bullets:
+
+    - This is a list item
+    - here's another|
+
+pressing |<Enter>| will insert a list bullet, like this:
+
+    - This is a list item
+    - here's another
+    - |
+      
+If you don't want that list bullet, press |<Enter>| again:
+
+    - This is a list item
+    - here's another
+    |
+
+Wapow. Kablam. 
 
 ===============================================================================
 2 Requirements                                                 *doubletap-reqs*
 
-Double-tap requires |+comments|.
-
-To find out whether it should clear the line or simply deliver the |Enter|
-keystroke as usual, Double-tap checks the 'comments' setting. Specifically it
-finds the item in the 'comments' setting where the {flags} portion is empty. If
-it cannot find it, a regular |Enter| is delivered every time.
-
-If it is found, Double-tap has no way of knowing if it's actually correct. Thus
-you are encouraged to either set the 'comments' setting appropriately for the
-filetype of your choice if Double-tap behaves badly, or not use this plugin
-(see |doubletap-trivia|).
+Double-tap requires |+comments|. It also uses the 'comments' setting,
+specifically the part where the {flags} portion is empty, so if you want this
+plugin to behave nicely, that should be populated.
 
 ===============================================================================
-3 Trivia                                                     *doubletap-trivia*
+3 Contributing                                              *doubletap-contrib*
 
-Did you know that pressing |i_CTRL-U| after pressing |Enter|, |o| or |O| in the
-situation above would have literally the exact same effect? (If you don't
-believe me, check the source!) Still, double-tapping is easier than some
-weird Ctrl-combo.
+I don't really use numbered lists in markdown, nor do they auto-insert for me,
+but I could imagine wanting to extend this functionality to that situation. If
+you want to do so, feel free to send me a pull request.
+
+Bugs can be reported on the Github page: http://github.com/hneutr/double-tap
 
 ===============================================================================
-4 Contributing                                              *doubletap-contrib*
+4 Acknowledgements                                  |doubletap-acknowledgements|
 
-To be honest, I don't envision anything more for this plugin than what it
-already does. Ideas that would be fitting are most welcome since I cannot
-think of anything myself.
-
-Bugs can be reported on the Github page: http://github.com/osse/double-tap
+This is basically Øystein Walle's plugin with a tiny change. He's the smart
+one. You can find his original version here:
+https://github.com/Osse/double-tap
 
  vim:tw=78:ts=8:ft=help:norl:
