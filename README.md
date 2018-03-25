@@ -1,9 +1,8 @@
-Double-tap
-==========
-Øystein Walle <oystwa@gmail.com>
+# Double-tap
 
-From time to time people ask on `#vim` on Freenode how they can disable
-automatic insertion of comments when they open a new line. I think this is often
-very handy when you're writing a longer, multi-line comment. How do we get the
-best of both worlds? Double-tap!
+fork from [Øystein Walle](https://github.com/hneutr/double-tap.git) version.
+Extends doubletap to work on unnumbered markdown lists.
 
+Sometimes you want `Enter` to insert a comment symbol or list bullet, but
+sometimes you don't; this plugin maps a second `Enter` to delete the
+comment/list bullet if the line is empty.
